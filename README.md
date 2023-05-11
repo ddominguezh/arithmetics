@@ -1,0 +1,2 @@
+# arithmetics
+Codurance Kata Arithmetics
