@@ -18,6 +18,9 @@ public class Operation {
         if("*".equals(simbol)){
             return leftOperand * rightOperand;
         }
+        if("/".equals(simbol)){
+            return leftOperand / rightOperand;
+        }
         return leftOperand + rightOperand;
     }
 }
