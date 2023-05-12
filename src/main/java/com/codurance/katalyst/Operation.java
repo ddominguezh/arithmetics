@@ -22,6 +22,9 @@ public class Operation {
         this.rightOperand = rightOperand;
     }
     public static Operation create(String operation) {
+        if(!operation.startsWith("(")){
+            throw new InvalidRecordErrorException();
+        }
         String[] data = operation.substring(1, operation.length()-1).split(" ", -1);
         return new Operation(Float.valueOf(data[0]), data[1], Float.valueOf(data[2]));
     }
