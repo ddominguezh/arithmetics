@@ -16,6 +16,9 @@ public class Operations {
     }
 
     public float eval() {
+        if(isDifferentNumbersOfBracket()){
+            throw new InvalidRecordErrorException();
+        }
         if(isOnlyBracket()){
             return 0;
         }
@@ -35,6 +38,12 @@ public class Operations {
         ).eval();
     }
     
+    private boolean isDifferentNumbersOfBracket(){
+        long openBrackets = Pattern.compile("\\(").matcher(operations).results().count();
+        long closeBrackets = Pattern.compile("\\)").matcher(operations).results().count();
+        return openBrackets != closeBrackets;
+    }
+
     private boolean isOnlyBracket(){
         Matcher matcher = Pattern.compile("[\\(\\)]+").matcher(operations);
         Optional<MatchResult> result = matcher.results().findFirst();
