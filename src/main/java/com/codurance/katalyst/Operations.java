@@ -19,10 +19,20 @@ public class Operations {
         if(isOnlyBracket()){
             return 0;
         }
-        if(isOneNumberWthBracket()){
+        if(isOneNumberWithBracket()){
             return Float.valueOf(this.operations.substring(2, this.operations.length()-2));
         }
-        return Float.valueOf(this.operations);
+        if(isOnlyNumber()){
+            return Float.valueOf(this.operations);
+        }
+        int firstRightBracket = this.operations.indexOf(")") + 1;
+        int lastLeftBracketBeforeFirstRightBracket = this.operations.substring(0, firstRightBracket).lastIndexOf("(");
+        float valueOperation = Operation.create(operations.substring(lastLeftBracketBeforeFirstRightBracket, firstRightBracket)).eval();
+        return Operations.create(
+            this.operations.substring(0, lastLeftBracketBeforeFirstRightBracket) 
+            + valueOperation
+            + this.operations.substring(firstRightBracket)
+        ).eval();
     }
     
     private boolean isOnlyBracket(){
@@ -31,7 +41,11 @@ public class Operations {
         return result.isPresent() && operations.equals(result.get().group());
     }
 
-    private boolean isOneNumberWthBracket(){
-        return Pattern.compile("\\(\\s-?\\d+\\s\\)").matcher(operations).matches();
+    private boolean isOneNumberWithBracket(){
+        return Pattern.compile("\\(\\s[-]?(\\d*\\.)?\\d+\\s\\)").matcher(operations).matches();
+    }
+
+    private boolean isOnlyNumber(){
+        return Pattern.compile("[-]?(\\d*\\.)?\\d+").matcher(operations).matches();
     }
 }
