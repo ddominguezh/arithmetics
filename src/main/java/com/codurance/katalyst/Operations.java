@@ -15,16 +15,23 @@ public class Operations {
         return new Operations(operations);
     }
 
-    public Integer eval() {
+    public float eval() {
         if(isOnlyBracket()){
             return 0;
         }
-        return 0;
+        if(isOneNumberWthBracket()){
+            return Float.valueOf(this.operations.substring(2, this.operations.length()-2));
+        }
+        return Float.valueOf(this.operations);
     }
     
     private boolean isOnlyBracket(){
         Matcher matcher = Pattern.compile("[\\(\\)]+").matcher(operations);
         Optional<MatchResult> result = matcher.results().findFirst();
         return result.isPresent() && operations.equals(result.get().group());
+    }
+
+    private boolean isOneNumberWthBracket(){
+        return Pattern.compile("\\(\\s-?\\d+\\s\\)").matcher(operations).matches();
     }
 }
