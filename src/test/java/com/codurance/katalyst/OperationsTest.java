@@ -20,4 +20,9 @@ public class OperationsTest {
     public void return_value_when_operations_is_only_number(){
         assertEquals(14, Operations.create("14").eval());
     }
+
+    @Test
+    public void calculate_arithmetic_operation(){
+        assertEquals(111, Operations.create("( 1 + ( ( 2 + 3 ) * ( 4 * 5 ) ) )").eval());
+    }
 }
