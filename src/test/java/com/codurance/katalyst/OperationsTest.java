@@ -30,4 +30,9 @@ public class OperationsTest {
     public void calculate_arithmetic_operation_whit_precedence_rules(){
         assertEquals(-165, Operations.create("( 5 * ( 4 * ( 3 * ( 2 * ( 1 * 9 ) / 8 - 7 ) + 6 ) ) )").eval());
     }
+
+    @Test
+    public void different_number_of_open_and_closed_brackets(){
+        assertEquals(-165, Operations.create("( 5 * ( 4 * ( 3 * ( 2 * ( 1 * 9 ) / 8 - 7 + 6 ) ) )").eval());
+    }
 }
