@@ -40,4 +40,17 @@ public class OperationTest {
             Operation.create("(3 - 9").eval();
         });
     }
+
+    @Test
+    public void invalid_operations_when_not_contains_two_white_spaces(){
+        assertThrows(InvalidRecordErrorException.class, () -> {
+            Operation.create("(3- 9)").eval();
+        });
+        assertThrows(InvalidRecordErrorException.class, () -> {
+            Operation.create("(3 -9)").eval();
+        });
+        assertThrows(InvalidRecordErrorException.class, () -> {
+            Operation.create("(3-9)").eval();
+        });
+    }
 }
