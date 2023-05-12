@@ -28,7 +28,7 @@ public class OperationTest {
     }
 
     @Test
-    public void solve_two_operations(){
+    public void solve_precedence_rules(){
         assertEquals(-42, Operation.create("( 3 - 9 * 5 )").eval());
     }
 
