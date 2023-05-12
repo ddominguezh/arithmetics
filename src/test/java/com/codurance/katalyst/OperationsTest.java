@@ -1,6 +1,7 @@
 package com.codurance.katalyst;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -33,6 +34,8 @@ public class OperationsTest {
 
     @Test
     public void different_number_of_open_and_closed_brackets(){
-        assertEquals(-165, Operations.create("( 5 * ( 4 * ( 3 * ( 2 * ( 1 * 9 ) / 8 - 7 + 6 ) ) )").eval());
+        assertThrows(InvalidRecordErrorException.class, () -> {
+            Operations.create("( 5 * ( 4 * ( 3 * ( 2 * ( 1 * 9 ) / 8 - 7 + 6 ) ) )").eval();
+        });
     }
 }
