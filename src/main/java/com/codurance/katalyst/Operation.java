@@ -15,6 +15,9 @@ public class Operation {
         return new Operation(Float.valueOf(data[0]), data[1], Float.valueOf(data[2]));
     }
     public float eval(){
+        if("*".equals(simbol)){
+            return leftOperand * rightOperand;
+        }
         return leftOperand + rightOperand;
     }
 }
