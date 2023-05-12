@@ -22,7 +22,8 @@ public class Operation {
         this.rightOperand = rightOperand;
     }
     public static Operation create(String operation) {
-        if(!operation.startsWith("(")){
+        if(!operation.startsWith("(") 
+            || !operation.endsWith(")")){
             throw new InvalidRecordErrorException();
         }
         String[] data = operation.substring(1, operation.length()-1).split(" ", -1);
