@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 public class Operation {
 
     private List<String> data;
+    private static String[] SYMBOLS_WITH_PRECEDENCE_RULES = new String[] {"*", "/", "+", "-"};
     private HashMap<String, BinaryOperator<Float>> operations = new HashMap<String, BinaryOperator<Float>>(){
         {
             put("*", (left, right) -> left * right);
@@ -40,18 +41,18 @@ public class Operation {
         return numbers == symbols+1 && whiteSpaces == (numbers+symbols+1);
     }
     public float eval(){
-        this.operations.keySet().forEach(key -> {
+        for (String symbol : SYMBOLS_WITH_PRECEDENCE_RULES) {
             float value = 0;
             for( int i = data.size()-1 ; i >= 0; i-- ){
-                if(key.equals(data.get(i))){
-                    value = operations.get(key).apply(Float.valueOf(data.get(i - 1)), Float.valueOf(data.get(i + 1)));
+                if(symbol.equals(data.get(i))){
+                    value = operations.get(symbol).apply(Float.valueOf(data.get(i - 1)), Float.valueOf(data.get(i + 1)));
                     data.remove(i + 1);
                     data.remove(i);
                     data.remove(i - 1);
-                    data.add(value + "");
+                    data.add(i - 1, value + "");
                 }
             }
-        });
+        }
         return Float.valueOf(data.get(0));
     }
 }
