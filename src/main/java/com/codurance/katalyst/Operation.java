@@ -2,6 +2,7 @@ package com.codurance.katalyst;
 
 import java.util.HashMap;
 import java.util.function.BinaryOperator;
+import java.util.regex.Pattern;
 
 public class Operation {
 
@@ -29,9 +30,7 @@ public class Operation {
         return new Operation(Float.valueOf(data[0]), data[1], Float.valueOf(data[2]));
     }
     private static boolean hasBadFormat(String operation){
-        return !operation.startsWith("(") 
-                || !operation.endsWith(")")
-                || operation.split(" ", -1).length != 3;
+        return !Pattern.compile("\\(-?\\d+\\s[\\+\\-*\\/]\\s-?\\d+\\)").matcher(operation).matches();
     }
     public float eval(){
         return operations.get(symbol).apply(leftOperand, rightOperand);
