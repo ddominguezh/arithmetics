@@ -22,12 +22,16 @@ public class Operation {
         this.rightOperand = rightOperand;
     }
     public static Operation create(String operation) {
-        if(!operation.startsWith("(") 
-            || !operation.endsWith(")")){
+        if(hasBadFormat(operation)){
             throw new InvalidRecordErrorException();
         }
         String[] data = operation.substring(1, operation.length()-1).split(" ", -1);
         return new Operation(Float.valueOf(data[0]), data[1], Float.valueOf(data[2]));
+    }
+    private static boolean hasBadFormat(String operation){
+        return !operation.startsWith("(") 
+                || !operation.endsWith(")")
+                || operation.split(" ", -1).length != 3;
     }
     public float eval(){
         return operations.get(symbol).apply(leftOperand, rightOperand);
