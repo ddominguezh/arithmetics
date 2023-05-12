@@ -25,4 +25,9 @@ public class OperationsTest {
     public void calculate_arithmetic_operation(){
         assertEquals(101, Operations.create("( 1 + ( ( 2 + 3 ) * ( 4 * 5 ) ) )").eval());
     }
+
+    @Test
+    public void calculate_arithmetic_operation_whit_precedence_rules(){
+        assertEquals(-165, Operations.create("( 5 * ( 4 * ( 3 * ( 2 * ( 1 * 9 ) / 8 - 7 ) + 6 ) ) )").eval());
+    }
 }
