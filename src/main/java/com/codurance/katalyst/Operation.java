@@ -11,9 +11,9 @@ public class Operation {
     private float rightOperand;
     private HashMap<String, BinaryOperator<Float>> operations = new HashMap<String, BinaryOperator<Float>>(){
         {
-            put("+", (left, right) -> left + right);
             put("*", (left, right) -> left * right);
             put("/", (left, right) -> left / right);
+            put("+", (left, right) -> left + right);
             put("-", (left, right) -> left - right);
         }
     };
@@ -27,10 +27,10 @@ public class Operation {
             throw new InvalidRecordErrorException();
         }
         String[] data = operation.substring(1, operation.length()-1).split(" ", -1);
-        return new Operation(Float.valueOf(data[0]), data[1], Float.valueOf(data[2]));
+        return new Operation(Float.valueOf(data[1]), data[2], Float.valueOf(data[3]));
     }
     private static boolean hasBadFormat(String operation){
-        return !Pattern.compile("\\(-?\\d+\\s[\\+\\-*\\/]\\s-?\\d+\\)").matcher(operation).matches();
+        return !Pattern.compile("\\(\\s-?\\d+\\s[\\+\\-*\\/]\\s-?\\d+\\s\\)").matcher(operation).matches();
     }
     public float eval(){
         return operations.get(symbol).apply(leftOperand, rightOperand);
