@@ -28,6 +28,11 @@ public class OperationTest {
     }
 
     @Test
+    public void solve_two_operations(){
+        assertEquals(-42, Operation.create("( 3 - 9 * 5 )").eval());
+    }
+
+    @Test
     public void invalid_operations_when_not_start_with_bracket(){
         assertThrows(InvalidRecordErrorException.class, () -> {
             Operation.create(" 3 - 9 )").eval();
